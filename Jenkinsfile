@@ -23,7 +23,7 @@ pipeline {
         sh 'sbt test'
         sh 'sbt package'
         dockerImage = docker.build("Vidushi0808-hub/akka-http-examples")
-        docker.push($(git log -1 --format=%h))   
+        docker.push("latest")   
       }
     }
 
