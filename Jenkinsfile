@@ -1,4 +1,5 @@
 pipeline {
+  def img
   agent any
   stages {
     stage('Development') {
@@ -19,8 +20,8 @@ pipeline {
         echo 'Production'
         sh 'sbt test'
         sh 'sbt package'      
-        def dockerImage = docker.build("Vidushi0808-hub/akka-http-examples")
-        dockerImage.push("latest")   
+        img = docker.build("Vidushi0808-hub/akka-http-examples")
+        img.push("latest")   
     }
     }
   }
