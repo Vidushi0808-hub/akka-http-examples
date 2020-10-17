@@ -21,12 +21,9 @@ pipeline {
       steps {
         echo 'Production'
         sh 'sbt test'
-        sh 'sbt package'
-      }
-      steps{
-        dockerImage = docker.build("Vidushi0808-hub/akka-http-examples")
-        docker.push("latest")   
-      }
+        sh 'sbt package'      
+        def dockerImage = docker.build("Vidushi0808-hub/akka-http-examples")
+        dockerImage.push("latest")   
     }
     }
 
