@@ -6,17 +6,14 @@ pipeline {
         echo 'Development Stage'
         sh 'sbt compile'
         sh 'sbt test'
-      
      }
     }
-
     stage('Testing') {
       steps {
         echo 'Testing '
         sh 'sbt test'
       }
     }
-
     stage('Production') {
       steps {
         echo 'Production'
@@ -26,7 +23,7 @@ pipeline {
         dockerImage.push("latest")   
     }
     }
-
+  }
  post {
      always {
      mail to: "vidushi.bansal@knoldus.com",
@@ -40,8 +37,4 @@ pipeline {
       failure{
           echo "Failed!"
       }}
-}
-
-
-
-
+  }
