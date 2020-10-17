@@ -26,7 +26,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: '9760089324', usernameVariable: 'vidushi0808')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           sh 'docker push akka:latest'
-    }
+        }}
     }
   }
  post {
