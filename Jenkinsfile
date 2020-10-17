@@ -1,5 +1,5 @@
 pipeline {
-  def img
+  //def img
   agent any
   stages {
     stage('Development') {
@@ -20,8 +20,12 @@ pipeline {
         echo 'Production'
         sh 'sbt test'
         sh 'sbt package'      
-        img = docker.build("Vidushi0808-hub/akka-http-examples")
-        img.push("latest")   
+        //img = docker.build("Vidushi0808-hub/akka-http-examples")
+        //img.push("latest")
+        sh 'docker build -t shanem/spring-petclinic:latest .'
+        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: '9760089324', usernameVariable: 'vidushi0808')]) {
+          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh 'docker push akka:latest'
     }
     }
   }
