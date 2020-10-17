@@ -30,7 +30,6 @@ pipeline {
     }
     }
 
-  }
  post {
      always {
      mail to: "vidushi.bansal@knoldus.com",
@@ -43,10 +42,9 @@ pipeline {
              }
       failure{
           echo "Failed!"
-           }
- 
-                }
-
+      }}
 }
+
+
 
 
