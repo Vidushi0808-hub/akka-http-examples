@@ -22,8 +22,8 @@ pipeline {
         sh 'sbt package'      
         //img = docker.build("Vidushi0808-hub/akka-http-examples")
         //img.push("latest")
-        sh 'docker build -t shanem/spring-petclinic:latest .'
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: '9760089324', usernameVariable: 'vidushi0808')]) {
+        sh 'docker build -t akka:latest .'
+        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           sh 'docker push akka:latest'
         }}
