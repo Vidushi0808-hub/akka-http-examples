@@ -27,24 +27,14 @@ pipeline {
         sh 'sbt package' 
         sh 'docker build -t akka-http:latest .'
         sh 'docker tag akka-http:latest vidushi0808/akka-http'
-        sh 'docker push vidushi0808/akka-http:latest'
+       // sh 'docker push vidushi0808/akka-http:latest'
+        withDockerRegistry([ credentialsId: "docker-hub", url: "vidushi0808/akka-http" ]) {
+                                      // bat "docker tag dockerhub_username/repository_name/docker-jenkins-integration dockerhub_username/repository_name:docker-jenkins-integration"
+                                       bat "docker push vidushi0808/akka-http:latest"
+                                     }
         //withDockerRegistry([ credentialsId: "docker-hub", url: "vidushi0808/akka-http" ]) {
          // sh 'docker push akka-http:latest'
         //}
-        // sh 'docker push dockerImage'
-        //script{
-        //dockerImage = docker build registry + ":$BUILD_NUMBER" 
-        //}
-        //withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-          //sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          //sh 'docker push akka:latest'
-        //}
-       // script{
-       // dockerImage = docker build registry + ":$BUILD_NUMBER"
-        // docker.withRegistry( '', registryCredential ) {
-        // dockerImage.push()
-        // }
-       // }
       }
     }
   }
