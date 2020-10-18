@@ -26,7 +26,8 @@ pipeline {
         sh 'sbt test'
         sh 'sbt package' 
         sh 'docker build -t akka-http:latest .'
-        sh 'docker push registry/akka-http:latest'
+        sh 'docker tag akka-http:latest vidushi0808/akka-http'
+        sh 'docker push vidushi0808/akka-http:latest'
         //withDockerRegistry([ credentialsId: "docker-hub", url: "vidushi0808/akka-http" ]) {
          // sh 'docker push akka-http:latest'
         //}
