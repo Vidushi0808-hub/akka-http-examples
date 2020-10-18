@@ -33,8 +33,10 @@ pipeline {
           //sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           //sh 'docker push akka:latest'
         //}
+        script{
         docker.withRegistry( '', registryCredential ) {
         dockerImage.push()
+        }
         }
       }
     }
