@@ -26,7 +26,7 @@ pipeline {
         sh 'sbt test'
         sh 'sbt package' 
         sh 'docker build -t akka-http:latest .'
-        sh 'docker push vidushi0808/akka-http'
+        sh 'docker push akka-http:latest'
         
         //script{
         //dockerImage = docker build registry + ":$BUILD_NUMBER" 
