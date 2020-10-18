@@ -25,9 +25,8 @@ pipeline {
         echo 'Production'
         sh 'sbt test'
         sh 'sbt package' 
-        sh 'docker build -t akka-http:latest .'
+        // sh 'docker build -t akka-http:latest .'
        // sh 'docker push dockerImage'
-        
         //script{
         //dockerImage = docker build registry + ":$BUILD_NUMBER" 
         //}
