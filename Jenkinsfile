@@ -25,21 +25,21 @@ pipeline {
         echo 'Production'
         sh 'sbt test'
         sh 'sbt package' 
-      // sh 'docker build -t akka:latest .'  
-        //img = docker.build("Vidushi0808-hub/akka-http-examples")
-        //img.push("latest")
-        script{
-        dockerImage = docker build registry + ":$BUILD_NUMBER" 
-        }
+        sh 'docker build -t akka-http:latest .'
+        sh 'docker push vidushi0808/akka-http'
+        
+        //script{
+        //dockerImage = docker build registry + ":$BUILD_NUMBER" 
+        //}
         //withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           //sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           //sh 'docker push akka:latest'
         //}
-        script{
-        docker.withRegistry( '', registryCredential ) {
-        dockerImage.push()
-        }
-        }
+        //script{
+        //docker.withRegistry( '', registryCredential ) {
+        //dockerImage.push()
+        //}
+        //}
       }
     }
   }
