@@ -1,5 +1,10 @@
 pipeline {
   //def img
+  environment{
+    registry = "vidushi0808/akka-http"
+    registryCredential = 'docker-hub'
+    dockerImage = ''
+  }
   agent any
   stages {
     stage('Development') {
@@ -23,10 +28,15 @@ pipeline {
         //img = docker.build("Vidushi0808-hub/akka-http-examples")
         //img.push("latest")
         sh 'docker build -t akka:latest .'
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-          sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push akka:latest'
-        }}
+      
+        //withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+          //sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          //sh 'docker push akka:latest'
+        //}
+        docker.withRegistry( '', registryCredential ) {
+        dockerImage.push()
+        }
+      }
     }
   }
  post {
