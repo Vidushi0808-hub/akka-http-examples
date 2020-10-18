@@ -25,13 +25,8 @@ pipeline {
         echo 'Production'
         sh 'sbt test'
         sh 'sbt package' 
-        //sh 'docker build -t akka-http:latest .'
-        script{
-          dockerImage = docker build -f Dockerfile + ":$BUILD_NUMBER"
-          docker.withRegistry('',registryCredential){
-          dockerImage.push()
-          }
-        }
+        sh 'docker build -t akka-http:latest .'
+        sh 'docker push registry/akka-http:latest'
         //withDockerRegistry([ credentialsId: "docker-hub", url: "vidushi0808/akka-http" ]) {
          // sh 'docker push akka-http:latest'
         //}
