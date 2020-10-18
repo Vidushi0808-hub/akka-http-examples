@@ -24,11 +24,13 @@ pipeline {
       steps {
         echo 'Production'
         sh 'sbt test'
-        sh 'sbt package'      
+        sh 'sbt package' 
+      // sh 'docker build -t akka:latest .'  
         //img = docker.build("Vidushi0808-hub/akka-http-examples")
         //img.push("latest")
-        sh 'docker build -t akka:latest .'
-      
+        script{
+        dockerImage = docker build registry + ":$BUILD_NUMBER" 
+        }
         //withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           //sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           //sh 'docker push akka:latest'
