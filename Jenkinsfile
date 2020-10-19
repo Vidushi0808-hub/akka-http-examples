@@ -32,9 +32,9 @@ pipeline {
           dockerImage.push()
           }
         }
-script{
-       kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kube-id")
-      }
+//    script{
+//       kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kube-id")
+//      }
      }
     }
   }
