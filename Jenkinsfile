@@ -42,7 +42,7 @@ pipeline {
      body: "${env.JOB_NAME} has been completed. Refer to: ${env.BUILD_URL}"
              }
      success {
-         echo "Successful!"
+         echo "Successful completion!"
          cleanWs()
              }
       failure{
