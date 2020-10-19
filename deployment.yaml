@@ -2,12 +2,14 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: akka-http
+  labels:
+     app: akka
 spec:
  selector:
    matchLabels:
       app: akka
-  replicas: 2
-  template:
+ replicas: 2
+ template:
     metadata:
       labels:
         app: akka
@@ -16,5 +18,4 @@ spec:
       - name: akka-con
         image: vidushi0808/akka-http
         ports:
-        - containerPort: 8090
-
+        - containerPort: 8090       
