@@ -4,6 +4,7 @@ pipeline {
     registry = "vidushi0808/akka-http"
     registryCredential = 'docker-hub'
     dockerImage = ''
+    hashtag= $(git log -1 --pretty=%h)
   }
   agent any
   stages {
@@ -29,7 +30,7 @@ pipeline {
        //  sh 'sbt package'
         // Creating an image and pushing the image to Docker Hub
         script{
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER" + :hashtag
           docker.withRegistry( '',registryCredential ){
           dockerImage.push()
           }
