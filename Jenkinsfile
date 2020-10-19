@@ -10,7 +10,7 @@ pipeline {
     stage('Development') {
       steps {
         echo 'Development Stage'
-        sh 'sbt compile'
+        sh 'sbt clean compile'
         //sh 'sbt test'
      }
     }
