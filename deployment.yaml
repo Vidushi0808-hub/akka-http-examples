@@ -2,10 +2,12 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: akka-http
+  labels:
+    app: akka
 spec:
  selector:
    matchLabels:
-      app : akka
+      app: akka
   replicas: 2
   template:
     metadata:
