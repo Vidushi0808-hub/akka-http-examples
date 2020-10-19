@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: akka-con
-        image: vidushi0808/akka-http
+        image: vidushi0808/akka-http:$BUILD_NUMBER
         ports:
         - containerPort: 8090       
