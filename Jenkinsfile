@@ -29,7 +29,7 @@ pipeline {
        //  sh 'sbt package'
         // Creating an image and pushing the image to Docker Hub
         script{
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$$(git log -1 --pretty=%h)"
           docker.withRegistry( '',registryCredential ){
           dockerImage.push()
           }
