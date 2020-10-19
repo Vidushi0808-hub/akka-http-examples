@@ -21,6 +21,8 @@ pipeline {
       }
     }
     stage('Production') {
+      when {
+        branch 'master'
       steps {
         echo 'Production'
         //sh 'sbt test'
@@ -32,6 +34,8 @@ pipeline {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
           docker.withRegistry( '',registryCredential ){
           dockerImage.push()
+          // Removing the image from local
+          sh 'docker rmi $registry:$BUILD_NUMBER'
           }
         }
        echo "Deploying to kubernetes"
@@ -39,6 +43,7 @@ pipeline {
         sh "kubectl create -f deployment.yaml"
      }
     }
+  }
   }
  post {
      always {
