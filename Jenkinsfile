@@ -1,5 +1,5 @@
 pipeline {
-  //def img
+  // Declaring environment variables for docker credentials.
   environment{
     registry = "vidushi0808/akka-http"
     registryCredential = 'docker-hub'
@@ -11,7 +11,7 @@ pipeline {
       steps {
         echo 'Development Stage'
         sh 'sbt compile'
-        sh 'sbt test'
+        //sh 'sbt test'
      }
     }
     stage('Testing') {
@@ -23,27 +23,15 @@ pipeline {
     stage('Production') {
       steps {
         echo 'Production'
-        sh 'sbt test'
-        sh 'sbt package' 
-        //sh 'docker build -t akka-http:latest .'
-        //sh 'docker tag akka-http:latest vidushi0808/akka-http'
+        //sh 'sbt test'
+        sh 'sbt package'
+        // Creating an image and pushing the image to Docker Hub
         script{
-        dockerImage = docker.build registry
+          dockerImage = docker.build registry
           docker.withRegistry( '',registryCredential ){
           dockerImage.push()
           }
         }
-        
-        
-        
-        // sh 'docker push vidushi0808/akka-http:latest'
-        //withDockerRegistry([ credentialsId: "docker-hub", url: "vidushi0808/akka-http" ]) {
-                                      // bat "docker tag dockerhub_username/repository_name/docker-jenkins-integration dockerhub_username/repository_name:docker-jenkins-integration"
-          //                             bat "docker push vidushi0808/akka-http:latest"
-            //                         }
-        //withDockerRegistry([ credentialsId: "docker-hub", url: "vidushi0808/akka-http" ]) {
-         // sh 'docker push akka-http:latest'
-        //}
       }
     }
   }
