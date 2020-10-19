@@ -34,9 +34,8 @@ pipeline {
           dockerImage.push()
           }
         }
-//    script{
-//       kubernetesDeploy(configs: "deployment.yaml", kubeconfigId: "kube-id")
-//      }
+       echo "Deploying to kubernetes"
+        sh "kubectl create -f deployment.yaml"
      }
     }
   }
