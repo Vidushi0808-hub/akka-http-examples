@@ -2,17 +2,18 @@
 
 ## Files created:
 
-###Jenkinsfile: 
+### Jenkinsfile: 
 It contains a pipeline script for multiple stages of deployment, testing and production.
 It has build instructions for building a docker image and pushing it to dockerhub repository.
 
-###Dockerfile:
+### Dockerfile:
 It is a basic dockerfile that is used in the Jenkinsfile for CICD workflow. 
 
-###deployment.yaml
+### deployment.yaml:
 It takes the code from the dockerhub registry and deploys the containers in the GKE cluster.
 
-##Procedure:
+
+## Procedure:
 1. With each commit, the build is triggered in jenkins.
 2. In development stage, code is compiled.
 3. In testing stage, code is tested against several test-cases for errors.
