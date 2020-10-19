@@ -35,6 +35,7 @@ pipeline {
           }
         }
        echo "Deploying to kubernetes"
+        sh "kubectl delete -f deployment.yaml"
         sh "kubectl create -f deployment.yaml"
      }
     }
