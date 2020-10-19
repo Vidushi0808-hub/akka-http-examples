@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: akka-http
 spec:
+ selector:
+   matchLabels:
+      app : akka
   replicas: 2
   template:
     metadata:
